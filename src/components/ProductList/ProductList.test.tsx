@@ -8,6 +8,13 @@ jest.mock('../../context/CommerceContext', () => ({
   useCommerceContext: jest.fn(),
 }));
 
+const paginationData = {
+  skip: 0, 
+  take: 10, 
+  totalPages: 6, 
+  currentPage: 1
+};
+
 describe('ProductList', () => {
   test('renders product list', () => {
     const productList = [
@@ -23,7 +30,12 @@ describe('ProductList', () => {
       }
     ];
 
-    (useCommerceContext as jest.Mock).mockReturnValue({ productList });
+    (useCommerceContext as jest.Mock).mockReturnValue({ 
+      productList: {
+        items: productList, 
+        paginationData
+      } 
+    });
 
     render(<OrderProvider><ProductList /></OrderProvider>);
 
@@ -33,7 +45,12 @@ describe('ProductList', () => {
   test('renders empty product list', () => {
     const productList: Product[] = [];
 
-    (useCommerceContext as jest.Mock).mockReturnValue({ productList });
+    (useCommerceContext as jest.Mock).mockReturnValue({ 
+      productList: {
+        items: productList, 
+        paginationData
+      } 
+    });
 
     render(<ProductList />);
 

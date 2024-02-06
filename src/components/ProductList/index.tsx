@@ -17,7 +17,7 @@ export function ProductList() {
           <ProductContainer key={product.id} product={product} />
         ))}
       </GridContainer>
-      {productList.items.length > 0 && (
+      {productList?.items.length > 0 && (
         <Pagination 
           currentPage={productList.paginationData.currentPage} 
           totalPages= {productList.paginationData.totalPages} 
